@@ -52,7 +52,6 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: docker exec -d cosmos-master-node sh /root/onomy/cosmosNode/master/update-master-node.sh ${{ secrets.GIT_HUB_USER }} ${{ secrets.GIT_HUB_PASS }} ${{ secrets.GIT_HUB_EMAIL }} config && docker exec -d cosmos-master-node gravity unsafe-reset-all && docker exec -d cosmos-master-node gravity --home /root/.gravity/ --address tcp://0.0.0.0:26655 --rpc.laddr tcp://0.0.0.0:26657 --grpc.address 0.0.0.0:9090 --log_level error --p2p.laddr tcp://0.0.0.0:26656 --rpc.pprof_laddr 0.0.0.0:6060 start
-
           host: ${{ secrets.MASTER_NODE_HOST }}
           username: root
           password: ""
@@ -66,6 +65,7 @@ jobs:
           username: root
           password: ""
           privateKey: ${{ secrets.PRIVATE_KEY}}
+
       - name: Build and push full-node
         run: docker buildx build --tag leeway321/cosmos-full-node --file cosmosNode/fullNode/Dockerfile --platform linux/amd64 --push --progress tty --build-arg PUBLIC_IP=${{ secrets.FULL_NODE_HOST }} --build-arg GIT_HUB_USER=${{ secrets.GIT_HUB_USER }} --build-arg GIT_HUB_PASS=${{ secrets.GIT_HUB_PASS }} --build-arg GIT_HUB_EMAIL=${{ secrets.GIT_HUB_EMAIL }} --build-arg GIT_HUB_BRANCH=config .
 
