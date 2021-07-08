@@ -11,7 +11,10 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -yq
 
 ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/gravity-bridge
 # clone the repo //TODO this clone may be change in future
-RUN git clone https://github.com/althea-net/cosmos-gravity-bridge.git $GRAVITY_DIR
+# I have tried using repo https://github.com/althea-net/cosmos-gravity-bridge.git but there is no
+# command make build-linux found in makesfiles, so we forked anddd thhis command
+#RUN git clone https://github.com/althea-net/cosmos-gravity-bridge.git $GRAVITY_DIR
+RUN git clone https://github.com/ChaudharyShiva18/cosmos-gravity-bridge.git $GRAVITY_DIR
 
 
 # ------------------ gravity module ------------------
