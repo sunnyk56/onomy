@@ -1,8 +1,17 @@
-The gitAction present in ONET-42 is going to use this folder to deploy a network automatically. We are using a [pre-built image](https://hub.docker.com/r/leeway321/gravity-bridge-binary) that is having binary for all these nodes
+If you want to start a Test Network that has a single validator, orchestrator and ethereum node in it. The gitAction ```master-node.yml``` and ```master-cosmos-orchestrator-node.yml``` are going to use this folder to deploy a network automatically. We are using a [pre-built image](https://hub.docker.com/r/leeway321/gravity-bridge-binary) that is having binary for all these nodes
 
-# Test Network
+# Run in a Single Container
+Follow these steps to deploy a test network that is having one validator, one orchestrator, and one ethereum node that is deployed in one container in one machine.
+- ```master-cosmos-orchestrator-node.yml``` - This git hub action is going to deploy the required network automatically.
+- It uses the Dockerfile present in this folder to make an image and push it to the docker hub.
+- Then run a container using that image and which on starting execute the run.sh file present in the script folder and start a network.
 
-This test network is having one validator, one orchestrator, and one ethereum node that are deployed in different containers in one machine.
+# Run in Different Containers
+
+Follow these steps to deploy a test network that is having one validator, one orchestrator, and one ethereum node that is deployed in different containers in one machine.
+- ```master-node.yml``` - This git hub action is going to deploy the required network automatically.
+- It starts an individual container for each validator, orchestrator, and ethereum node.
+- Follow further steps to start your network:
 
 ## master-cosmos-validator-node
 
@@ -15,7 +24,7 @@ This is the main validator node it should be started first. To start master cosm
 This is an Ethereum node it should be started after starting the validator node. To start the ethereum node these steps are followed:
 - Build an image for master-cosmos-eth-node using Dockerfile present in the ethereum folder.
 - Use this image to start a docker container.
-- It uses the updated ETHgenesis.json file from the validator which has a public minter address and other information that are generated when add eth-key command ran.
+- It uses the updated ETHgenesis.json file from the validator which has a public minter address and other information that is generated when add eth-key command ran.
 - Now we deploy the smart contract.
 
 ## Deploy smart contract
