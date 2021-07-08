@@ -61,4 +61,4 @@ RUN sed -i 's#swagger = false#swagger = true#g' $GRAVITY_APP_CONFIG
 ##----------------------------- commit master genesis,json file-----
 RUN git clone -b $GIT_HUB_BRANCH https://github.com/sunnyk56/onomy.git
 WORKDIR /root/onomy
-CMD sh module/cosmosNode/fullNode/start.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
+CMD sh cosmosNode/fullNode/start.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
