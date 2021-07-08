@@ -14,6 +14,10 @@ ARG GRAVITY_GENESIS_COINS="100000000000stake,100000000000samoleans"
 RUN git clone -b $GIT_HUB_BRANCH https://github.com/sunnyk56/onomy.git
 RUN cp -r /root/onomy/deploy/master-cosmos-orchestrator-node/scripts scripts
 RUN cp -r /root/onomy/deploy/master-cosmos-orchestrator-node/assets assets
+
+RUN chmod -R +x /root/scripts
+RUN chmod -R +x /root/assets
+
 RUN sh scripts/init.sh
 
 ##----------------------------- commit master genesis,json file and seed-----
