@@ -1,10 +1,12 @@
 GRAVITY_CONFIG_FILE="/root/testchain/gravity/config"
 GRAVITY_GENESIS_FILE="/root/testchain/gravity/config/genesis.json"
+GRAVITY_ASSETS="/root/assets"
 BUCKET_MASTER_GENESIS_FILE="master/genesis.json"
+BUCKET_MASTER="/root/onomy/master"
 
-PEER_INFO="/root/gravity-bridge/peerInfo"
-PEER_INFO_VALIDATOR_KEY="/root/gravity-bridge/peerInfo/validator_key.json"
-PEER_INFO_ORCHESTRATOR_KEY="/root/gravity-bridge/peerInfo/orchestrator_key.json"
+PEER_INFO="/root/onomy/peerInfo"
+PEER_INFO_VALIDATOR_KEY="/root/onomy/peerInfo/testchain/gravity/validator_key.json"
+PEER_INFO_ORCHESTRATOR_KEY="/root/onomy/peerInfo/testchain/gravity/orchestrator_key.json"
 
 GIT_HUB_USER=$1
 GIT_HUB_PASS=$2
@@ -30,6 +32,9 @@ gravity $GRAVITY_HOME_FLAG add-genesis-account $validatorKey $GRAVITY_GENESIS_CO
 echo "Collecting gentxs files in config gentx"
 cp $PEER_INFO/gentx/*.json $GRAVITY_CONFIG_FILE/gentx/
 
+echo "updating EthGenesis.json in the root assets directory"
+cp $BUCKET_MASTER/. $GRAVITY_ASSETS
+
 
 echo "Adding orchestrator keys to genesis"
 GRAVITY_ORCHESTRATOR_KEY="$(jq .address $PEER_INFO_ORCHESTRATOR_KEY)"
@@ -48,7 +53,7 @@ touch $BUCKET_MASTER_GENESIS_FILE
 echo "Copying genesis file"
 cp $GRAVITY_GENESIS_FILE $BUCKET_MASTER_GENESIS_FILE
 echo "git add command"
-git add .
+git add master
 echo "git add git config command"
 git config --global user.email $GIT_HUB_EMAIL
 git config --global user.name $GIT_HUB_USER
@@ -59,5 +64,6 @@ echo "git push command"
 git push origin $GIT_HUB_BRANCH
 
 # Resets the blockchain database, removes address book files and start the node
-gravity $GRAVITY_HOME_FLAG unsafe-reset-all
-gravity $GRAVITY_HOME_FLAG --address tcp://0.0.0.0:26655 --rpc.laddr tcp://0.0.0.0:26657 --grpc.address 0.0.0.0:9090 --log_level error --p2p.laddr tcp://0.0.0.0:26656 --rpc.pprof_laddr 0.0.0.0:6060 start
+#gravity $GRAVITY_HOME_FLAG unsafe-reset-all
+#gravity $GRAVITY_HOME_FLAG --address tcp://0.0.0.0:26655 --rpc.laddr tcp://0.0.0.0:26657 --grpc.address 0.0.0.0:9090 --log_level error --p2p.laddr tcp://0.0.0.0:26656 --rpc.pprof_laddr 0.0.0.0:6060 start
+sh /root/scripts/cosmos-run.sh
