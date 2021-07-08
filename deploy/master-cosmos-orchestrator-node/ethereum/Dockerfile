@@ -19,4 +19,4 @@ RUN chmod -R +x /root/scripts
 RUN chmod -R +x /root/assets
 #RUN chmod -R +x /root/testchain
 
-CMD sh scripts/ethereum-run.sh
+CMD ["sh", "scripts/ethereum-run.sh"]

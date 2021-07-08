@@ -29,4 +29,4 @@ RUN sh deploy/master-cosmos-orchestrator-node/scripts/store-master-info.sh $GIT_
 
 WORKDIR /root
 
-CMD sh scripts/cosmos-run.sh
+CMD ["sh", "scripts/cosmos-run.sh"]

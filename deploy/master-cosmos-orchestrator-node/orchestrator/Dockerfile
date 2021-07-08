@@ -17,4 +17,4 @@ RUN cp -r /root/onomy/master/testchain testchain
 RUN chmod -R +x /root/scripts
 RUN chmod -R +x /root/testchain
 
-CMD sh scripts/orchestrator-run.sh
+CMD ["sh", "scripts/orchestrator-run.sh"]
