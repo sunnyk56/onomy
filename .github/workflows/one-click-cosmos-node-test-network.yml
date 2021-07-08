@@ -51,7 +51,7 @@ jobs:
       - name: Update master node
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: docker rm -f cosmos-master-node && docker run --name cosmos-master-node -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090 leeway321/cosmos-master-node /bin/sh -c "sleep infinite | sh /root/onomy/cosmosNode/master/update-master-node.sh ${{ secrets.GIT_HUB_USER }} ${{ secrets.GIT_HUB_PASS }} ${{ secrets.GIT_HUB_EMAIL }} config | gravity --home /root/.gravity/ --address tcp://0.0.0.0:26655 --rpc.laddr tcp://0.0.0.0:26657 --grpc.address 0.0.0.0:9090 --log_level error --p2p.laddr tcp://0.0.0.0:26656 --rpc.pprof_laddr 0.0.0.0:6060 start"
+          command: sleep 10 && docker rm -f cosmos-master-node && docker run --name cosmos-master-node -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090 leeway321/cosmos-master-node /bin/sh -c "sleep infinite | sh /root/onomy/cosmosNode/master/update-master-node.sh ${{ secrets.GIT_HUB_USER }} ${{ secrets.GIT_HUB_PASS }} ${{ secrets.GIT_HUB_EMAIL }} config | gravity --home /root/.gravity/ --address tcp://0.0.0.0:26655 --rpc.laddr tcp://0.0.0.0:26657 --grpc.address 0.0.0.0:9090 --log_level error --p2p.laddr tcp://0.0.0.0:26656 --rpc.pprof_laddr 0.0.0.0:6060 start"
           host: ${{ secrets.MASTER_NODE_HOST }}
           username: root
           password: ""
