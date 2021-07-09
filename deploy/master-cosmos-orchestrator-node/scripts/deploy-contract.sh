@@ -63,5 +63,5 @@ echo "Contract address: $CONTRACT_ADDRESS"
 #sh deploy/master-cosmos-orchestrator-node/scripts/store-ethereum-contract-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
 
 # return back to home
-#cd $CURRENT_WORKING_DIR
+cd $CURRENT_WORKING_DIR
 #sleep 10
