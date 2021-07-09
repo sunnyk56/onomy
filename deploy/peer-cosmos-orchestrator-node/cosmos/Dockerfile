@@ -9,9 +9,11 @@ ARG GIT_HUB_BRANCH=${GIT_HUB_BRANCH}
 
 ARG GRAVITY_GENESIS_COINS="100000000000stake,100000000000samoleans"
 
-RUN git clone -b $GIT_HUB_BRANCH https://github.com/sunnyk56/gravity-bridge.git
-RUN cp -r /root/gravity-bridge/deploy/peer-cosmos-orchestrator-node/scripts scripts
-RUN cp -r /root/gravity-bridge/deploy/master-cosmos-orchestrator-node/assets assets
+# purpose of clone the repo is to commit and push genesis file and seed in this repo to use by other node
+# //TODO this clone may be change in future
+RUN git clone -b $GIT_HUB_BRANCH https://github.com/sunnyk56/onomy.git
+RUN cp -r /root/onomy/deploy/peer-cosmos-orchestrator-node/scripts scripts
+RUN cp -r /root/onomy/deploy/master-cosmos-orchestrator-node/assets assets
 
 RUN chmod -R +x /root/scripts
 RUN chmod -R +x /root/assets
@@ -22,8 +24,8 @@ RUN sh scripts/init.sh
 RUN gravity --home /root/testchain/gravity tendermint show-node-id > seed
 RUN sed -i 's#'$(gravity --home /root/testchain/gravity tendermint show-node-id)'#'$(gravity --home /root/testchain/gravity tendermint show-node-id)'@'$PUBLIC_IP':26656#g' seed
 
-WORKDIR /root/gravity-bridge
-RUN sh deploy/master-cosmos-orchestrator-node/scripts/store-master-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
+WORKDIR /root/onomy
+RUN sh deploy/peer-cosmos-orchestrator-node/scripts/store-peer-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
 
 WORKDIR /root
 
