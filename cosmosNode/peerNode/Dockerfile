@@ -1,35 +1,35 @@
-# FROM golang:1.16-alpine AS build-env
+FROM golang:1.16-alpine AS build-env
 
-# # Set up dependencies
-# ENV PACKAGES curl make git libc-dev bash gcc linux-headers eudev-dev python3 git
+# Set up dependencies
+ENV PACKAGES curl make git libc-dev bash gcc linux-headers eudev-dev python3 git
 
-# RUN apk add --no-cache $PACKAGES
+RUN apk add --no-cache $PACKAGES
 
-# ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/gravity-bridge
+ARG GRAVITY_DIR=/go/src/github.com/shivaLeeway/gravity-bridge
 
-# # clone the repo
-# RUN git clone https://github.com/onomyprotocol/gravity-bridge.git $GRAVITY_DIR
+# clone the repo
+RUN git clone https://github.com/shivaLeeway/gravity-bridge.git $GRAVITY_DIR
 
-# # set working dir
-# WORKDIR $GRAVITY_DIR/module
+# set working dir
+WORKDIR $GRAVITY_DIR/module
 
-# # Build gravity artifact
-# RUN make build-linux
+# Build gravity artifact
+RUN make build-linux
 
-# RUN ls build
-# # Final image
-# FROM alpine:edge
+RUN ls build
+# Final image
+FROM alpine:edge
 
-# # Install ca-certificates
-# RUN apk add --update ca-certificates git jq
-# WORKDIR /root
+# Install ca-certificates
+RUN apk add --update ca-certificates git jq
+WORKDIR /root
 
-# ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/gravity-bridge
+ARG GRAVITY_DIR=/go/src/github.com/shivaLeeway/gravity-bridge
 
-# # Copy over binaries from the build-env
-# COPY --from=build-env $GRAVITY_DIR/module/build/gravity /usr/bin/gravity
-# EXPOSE 26656 26657 1317 9090
-FROM leeway321/gravity-bridge-binary:latest AS builder
+# Copy over binaries from the build-env
+COPY --from=build-env $GRAVITY_DIR/module/build/gravity /usr/bin/gravity
+EXPOSE 26656 26657 1317 9090
+# FROM leeway321/gravity-bridge-binary:latest AS builder
 
 ARG CHAIN_ID="gravity-testnet"
 ARG KEYRING="--keyring-backend test"
