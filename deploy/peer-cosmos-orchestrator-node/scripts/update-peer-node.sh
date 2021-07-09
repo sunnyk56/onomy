@@ -11,7 +11,7 @@ git pull origin $GIT_HUB_BRANCH
 echo "updating EthGenesis.json in the root assets directory"
 rm -rf $GRAVITY_ASSETS
 mkdir $GRAVITY_ASSETS
-cp $BUCKET_MASTER/. $GRAVITY_ASSETS
+cp $BUCKET_MASTER/assets/. $GRAVITY_ASSETS
 
 
 echo "Copying genesis file"

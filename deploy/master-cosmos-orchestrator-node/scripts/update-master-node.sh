@@ -23,7 +23,7 @@ echo "Get pull updates"
 git pull origin $GIT_HUB_BRANCH
 
 echo "extracting validator address"
-validatorKey=$(cat PEER_INFO_VALIDATOR_KEY)
+validatorKey=$(cat $PEER_INFO_VALIDATOR_KEY)
 echo $validatorKey
 
 echo "Adding validator addresses to genesis files"
@@ -35,7 +35,7 @@ cp $PEER_INFO/gentx/*.json $GRAVITY_CONFIG_FILE/gentx/
 echo "updating EthGenesis.json in the root assets directory"
 rm -rf $GRAVITY_ASSETS
 mkdir $GRAVITY_ASSETS
-cp $BUCKET_MASTER/. $GRAVITY_ASSETS
+cp $BUCKET_MASTER/assets/. $GRAVITY_ASSETS
 
 
 echo "Adding orchestrator keys to genesis"
