@@ -37,7 +37,8 @@ ETH_HOST=$6
 echo "Applying contracts"
 GRAVITY_DIR=/go/src/github.com/onomyprotocol/gravity-bridge/
 cd $GRAVITY_DIR/solidity
-
+ls
+echo "running contract-deployer.ts: GRAVITY_HOST: $GRAVITY_HOST ETH_HOST: $ETH_HOST"
 npx ts-node \
     contract-deployer.ts \
     --cosmos-node="http://$GRAVITY_HOST:26657" \
