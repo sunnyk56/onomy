@@ -15,8 +15,6 @@ WORKDIR $GRAVITY_DIR/module
 
 # Build gravity artifact
 RUN make install
-
-RUN ls build
 # Final image
 FROM alpine:edge
 
@@ -24,10 +22,10 @@ FROM alpine:edge
 RUN apk add --update ca-certificates git jq
 WORKDIR /root
 
-ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
+ARG GRAVITY_DIR=/go/bin/gravity
 
 # Copy over binaries from the build-env
-COPY --from=build-env $GRAVITY_DIR/module/build/gravity /usr/bin/gravity
+COPY --from=build-env $GRAVITY_DIR /usr/bin/gravity
 EXPOSE 26656 26657 1317 9090
 # FROM leeway321/gravity-bridge-binary:latest AS builder
 
