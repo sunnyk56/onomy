@@ -20,7 +20,7 @@ RUN chmod -R +x /root/assets
 
 RUN sh scripts/init.sh
 
-##----------------------------- commit master genesis,json file and seed-----
+##----------------------------- commit master genesis,json file, assets and seed-----
 RUN gravity --home /root/testchain/gravity tendermint show-node-id > seed
 RUN sed -i 's#'$(gravity --home /root/testchain/gravity tendermint show-node-id)'#'$(gravity --home /root/testchain/gravity tendermint show-node-id)'@'$PUBLIC_IP':26656#g' seed
 
@@ -29,4 +29,4 @@ RUN sh deploy/master-cosmos-orchestrator-node/scripts/store-master-info.sh $GIT_
 
 WORKDIR /root
 
-CMD ["sh", "scripts/cosmos-run.sh"]
+#CMD ["sh", "scripts/cosmos-run.sh"]
