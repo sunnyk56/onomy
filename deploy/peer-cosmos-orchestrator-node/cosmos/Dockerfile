@@ -27,6 +27,6 @@ RUN sed -i 's#'$(gravity --home /root/testchain/gravity tendermint show-node-id)
 WORKDIR /root/onomy
 RUN sh deploy/peer-cosmos-orchestrator-node/scripts/store-peer-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
 
-WORKDIR /root
+#WORKDIR /root
 
-CMD ["sh", "scripts/cosmos-run.sh"]
+#CMD ["sh", "/root/scripts/cosmos-run.sh"]
