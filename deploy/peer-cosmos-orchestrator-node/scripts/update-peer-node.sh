@@ -1,3 +1,4 @@
+ROOT="/root"
 GRAVITY_GENESIS_FILE="/root/testchain/gravity/config/genesis.json"
 GRAVITY_ASSETS="/root/assets"
 BUCKET_MASTER_GENESIS_FILE="master/genesis.json"
@@ -18,6 +19,8 @@ echo "Copying genesis file"
 rm -f $GRAVITY_GENESIS_FILE
 touch $GRAVITY_GENESIS_FILE
 cp -r $BUCKET_MASTER/assets/. $GRAVITY_ASSETS
+
+cd $ROOT
 
 echo "Run the cosmos-run scripts"
 sh /root/scripts/cosmos-run.sh

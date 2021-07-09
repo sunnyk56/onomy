@@ -1,3 +1,4 @@
+ROOT="/root"
 GRAVITY_CONFIG_FILE="/root/testchain/gravity/config"
 GRAVITY_GENESIS_FILE="/root/testchain/gravity/config/genesis.json"
 GRAVITY_ASSETS="/root/assets"
@@ -65,6 +66,8 @@ echo "git commit command"
 git commit -m "update genesis file by master node"
 echo "git push command"
 git push origin $GIT_HUB_BRANCH
+
+cd $ROOT
 
 # Resets the blockchain database, removes address book files and start the node
 #gravity $GRAVITY_HOME_FLAG unsafe-reset-all
