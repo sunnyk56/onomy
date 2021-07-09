@@ -17,7 +17,7 @@ cp $BUCKET_MASTER/assets/. $GRAVITY_ASSETS
 echo "Copying genesis file"
 rm -f $GRAVITY_GENESIS_FILE
 touch $GRAVITY_GENESIS_FILE
-cp $BUCKET_MASTER_GENESIS_FILE $GRAVITY_GENESIS_FILE
+cp -r $BUCKET_MASTER/assets/. $GRAVITY_ASSETS
 
 echo "Run the cosmos-run scripts"
 sh /root/scripts/cosmos-run.sh

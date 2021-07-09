@@ -35,7 +35,7 @@ cp $PEER_INFO/gentx/*.json $GRAVITY_CONFIG_FILE/gentx/
 echo "updating EthGenesis.json in the root assets directory"
 rm -rf $GRAVITY_ASSETS
 mkdir $GRAVITY_ASSETS
-cp $BUCKET_MASTER/assets/. $GRAVITY_ASSETS
+cp -r $BUCKET_MASTER/assets/. $GRAVITY_ASSETS
 
 
 echo "Adding orchestrator keys to genesis"
@@ -60,7 +60,7 @@ git add master
 echo "git add git config command"
 git config --global user.email $GIT_HUB_EMAIL
 git config --global user.name $GIT_HUB_USER
-git remote set-url origin https://$GIT_HUB_USER:$GIT_HUB_PASS@github.com/sunnyk56/gravity-bridge.git
+git remote set-url origin https://$GIT_HUB_USER:$GIT_HUB_PASS@github.com/sunnyk56/onomy.git
 echo "git commit command"
 git commit -m "update genesis file by master node"
 echo "git push command"
