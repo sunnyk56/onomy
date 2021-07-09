@@ -14,4 +14,7 @@ RUN cp -r /root/onomy/deploy/master-cosmos-orchestrator-node/scripts scripts
 #RUN cp -r /root/onomy/master/assets assets
 RUN cp -r /root/onomy/master/testchain testchain
 
-CMD sh scripts/orchestrator-run.sh
+RUN chmod -R +x /root/scripts
+RUN chmod -R +x /root/testchain
+
+CMD ["sh", "scripts/orchestrator-run.sh"]
