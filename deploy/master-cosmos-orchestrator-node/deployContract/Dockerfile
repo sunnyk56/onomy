@@ -19,7 +19,7 @@ RUN chmod -R +x /root/scripts
 RUN chmod -R +x /root/assets
 RUN chmod -R +x /root/testchain
 
-RUN sh scripts/deploy-contract.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH $GRAVITY_HOST $ETH_HOST
+RUN sh /root/onomy/deploy/master-cosmos-orchestrator-node/scripts/deploy-contract.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH $GRAVITY_HOST $ETH_HOST
 
 ##----------------------------- commit save Contract address-----
 WORKDIR /root/onomy
