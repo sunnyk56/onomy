@@ -5,16 +5,16 @@ ENV PACKAGES curl make git libc-dev bash gcc linux-headers eudev-dev python3 git
 
 RUN apk add --no-cache $PACKAGES
 
-ARG GRAVITY_DIR=/go/src/github.com/shivaLeeway/gravity-bridge
+ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
 
 # clone the repo
-RUN git clone https://github.com/shivaLeeway/gravity-bridge.git $GRAVITY_DIR
+RUN git clone https://github.com/onomyprotocol/cosmos-gravity-bridge.git $GRAVITY_DIR
 
 # set working dir
 WORKDIR $GRAVITY_DIR/module
 
 # Build gravity artifact
-RUN make build-linux
+RUN make install
 
 RUN ls build
 # Final image
@@ -24,7 +24,7 @@ FROM alpine:edge
 RUN apk add --update ca-certificates git jq
 WORKDIR /root
 
-ARG GRAVITY_DIR=/go/src/github.com/shivaLeeway/gravity-bridge
+ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
 
 # Copy over binaries from the build-env
 COPY --from=build-env $GRAVITY_DIR/module/build/gravity /usr/bin/gravity
