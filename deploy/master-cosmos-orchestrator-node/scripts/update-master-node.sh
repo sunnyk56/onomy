@@ -5,7 +5,7 @@ BUCKET_MASTER_GENESIS_FILE="master/genesis.json"
 BUCKET_MASTER="/root/onomy/master"
 
 PEER_INFO="/root/onomy/peerInfo"
-PEER_INFO_VALIDATOR_KEY="/root/onomy/peerInfo/testchain/gravity/validator_key.json"
+PEER_INFO_VALIDATOR_KEY="/root/onomy/peerInfo/testchain/gravity/val_key"
 PEER_INFO_ORCHESTRATOR_KEY="/root/onomy/peerInfo/testchain/gravity/orchestrator_key.json"
 
 GIT_HUB_USER=$1
@@ -23,8 +23,8 @@ echo "Get pull updates"
 git pull origin $GIT_HUB_BRANCH
 
 echo "extracting validator address"
-validatorKey="$(jq .address $PEER_INFO_VALIDATOR_KEY)"
-echo validatorKey
+validatorKey=$(cat PEER_INFO_VALIDATOR_KEY)
+echo $validatorKey
 
 echo "Adding validator addresses to genesis files"
 gravity $GRAVITY_HOME_FLAG add-genesis-account $validatorKey $GRAVITY_GENESIS_COINS
@@ -33,11 +33,14 @@ echo "Collecting gentxs files in config gentx"
 cp $PEER_INFO/gentx/*.json $GRAVITY_CONFIG_FILE/gentx/
 
 echo "updating EthGenesis.json in the root assets directory"
+rm -rf $GRAVITY_ASSETS
+mkdir $GRAVITY_ASSETS
 cp $BUCKET_MASTER/. $GRAVITY_ASSETS
 
 
 echo "Adding orchestrator keys to genesis"
 GRAVITY_ORCHESTRATOR_KEY="$(jq .address $PEER_INFO_ORCHESTRATOR_KEY)"
+echo $GRAVITY_ORCHESTRATOR_KEY
 
 jq ".app_state.auth.accounts += [{\"@type\": \"/cosmos.auth.v1beta1.BaseAccount\",\"address\": $GRAVITY_ORCHESTRATOR_KEY,\"pub_key\": null,\"account_number\": \"0\",\"sequence\": \"0\"}]" $GRAVITY_CONFIG_FILE/genesis.json | sponge $GRAVITY_CONFIG_FILE/genesis.json
 jq ".app_state.bank.balances += [{\"address\": $GRAVITY_ORCHESTRATOR_KEY,\"coins\": [{\"denom\": \"$NORMAL_DENOM\",\"amount\": \"100000000000\"},{\"denom\": \"$STAKE_DENOM\",\"amount\": \"100000000000\"}]}]" $GRAVITY_CONFIG_FILE/genesis.json | sponge $GRAVITY_CONFIG_FILE/genesis.json
