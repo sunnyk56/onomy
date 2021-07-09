@@ -49,10 +49,10 @@ npx ts-node \
 CONTRACT_ADDRESS=$(cat $GRAVITY_HOME/eth_contract_address)
 echo "Contract address: $CONTRACT_ADDRESS"
 
-##----------------------------- commit save Contract address-----
-cd /root/onomy/
-sh deploy/master-cosmos-orchestrator-node/scripts/store-ethereum-contract-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
+###----------------------------- commit save Contract address-----
+#cd /root/onomy/
+#sh deploy/master-cosmos-orchestrator-node/scripts/store-ethereum-contract-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
 
 # return back to home
-cd $CURRENT_WORKING_DIR
-sleep 10
+#cd $CURRENT_WORKING_DIR
+#sleep 10
