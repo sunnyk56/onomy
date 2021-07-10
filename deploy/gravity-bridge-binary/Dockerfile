@@ -22,7 +22,7 @@ FROM alpine:edge
 # Install ca-certificates
 RUN apk add --no-cache ca-certificates yq \
     curl \
-    build-essential \
+    build-base \
     tar \
     git
 WORKDIR /root
