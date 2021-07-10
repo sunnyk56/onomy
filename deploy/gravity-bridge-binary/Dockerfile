@@ -20,7 +20,7 @@ RUN make install
 FROM alpine:edge
 
 # Install ca-certificates
-RUN apk add --no-cache ca-certificates yq \
+RUN apk add --no-cache ca-certificates yq bash \
     curl \
     build-base \
     tar \
