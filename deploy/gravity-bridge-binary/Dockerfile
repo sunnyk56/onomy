@@ -24,7 +24,7 @@ ENV PATH=$PATH:$GOPATH/bin
 # build gravity artifact
 WORKDIR $GRAVITY_DIR/module
 # Build gravity artifact
-RUN make build-linux
+RUN make install
 # copy binary to bin
 RUN cp /go/bin/gravity /usr/bin/gravity
 
