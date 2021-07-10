@@ -26,7 +26,7 @@ WORKDIR $GRAVITY_DIR/module
 RUN make install
 # copy binary to bin
 RUN cp /go/bin/gravity /usr/bin
-RUN cd /usr/bin
+RUN cd /go/bin
 RUN ls
 
 # # ------------------ orchestrator ------------------
