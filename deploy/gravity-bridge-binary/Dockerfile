@@ -67,7 +67,7 @@ RUN cargo version
 # build orchestrator artifact
 WORKDIR $GRAVITY_DIR/orchestrator
 RUN rustup target add x86_64-unknown-linux-musl
-RUN apk add --no-cache yq musl-tools
+RUN apk add --no-cache yq musl
 # RUN apt-get install --no-install-recommends -yq musl-tools
 RUN cargo build --target=x86_64-unknown-linux-musl --release  --all
 RUN cp $GRAVITY_DIR/orchestrator/target/x86_64-unknown-linux-musl/release/gbt /usr/bin/gbt
