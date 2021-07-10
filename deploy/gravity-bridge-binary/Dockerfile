@@ -69,7 +69,7 @@ ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
 RUN git clone https://github.com/onomyprotocol/cosmos-gravity-bridge.git $GRAVITY_DIR
 WORKDIR $GRAVITY_DIR/orchestrator
 RUN rustup target add x86_64-unknown-linux-musl
-RUN apk add --no-cache yq musl
+RUN apk add --no-cache yq musl protobuf-dev protobuf
 RUN ls
 # RUN apt-get install --no-install-recommends -yq musl-tools
 WORKDIR $GRAVITY_DIR/orchestrator
