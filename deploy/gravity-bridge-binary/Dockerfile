@@ -1,31 +1,58 @@
-FROM ubuntu:latest
+FROM golang:alpine AS build-env
 
-RUN apt-get update -y -q && apt-get upgrade -yq
-# common (DEBIAN_FRONTEND is a fix for tzdata)
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -yq software-properties-common \
-    curl \
-    build-essential \
-    ca-certificates \
-    tar \
-    git
+# Install minimum necessary dependencies,
+ENV PACKAGES curl make git libc-dev bash gcc linux-headers eudev-dev python3
+RUN apk add --no-cache $PACKAGES
 
+# Set working directory for the build
 ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
 RUN git clone https://github.com/onomyprotocol/cosmos-gravity-bridge.git $GRAVITY_DIR
-
-
-# ------------------ gravity module ------------------
-# install golang
-RUN curl https://dl.google.com/go/go1.16.4.linux-amd64.tar.gz --output go.tar.gz
-RUN tar -C /usr/local -xzf go.tar.gz
-ENV PATH="/usr/local/go/bin:$PATH"
-ENV GOPATH=/go
-ENV PATH=$PATH:$GOPATH/bin
-# build gravity artifact
+# WORKDIR /go/src/github.com/althea-net/cosmos-gravity-bridge/module
 WORKDIR $GRAVITY_DIR/module
-# Build gravity artifact
+
+# Add source files
+# COPY . .
+
+# install simapp, remove packages
 RUN make install
-# copy binary to bin
-RUN cp /go/bin/gravity /usr/bin/gravity
+
+# Final image
+FROM alpine:edge
+
+# Install ca-certificates
+RUN apk add --update ca-certificates
+WORKDIR /root
+
+# Copy over binaries from the build-env
+COPY --from=build-env /go/bin/gravity /usr/bin/gravity
+# FROM ubuntu:latest
+
+# RUN apt-get update -y -q && apt-get upgrade -yq
+# # common (DEBIAN_FRONTEND is a fix for tzdata)
+# RUN DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -yq software-properties-common \
+#     curl \
+#     build-essential \
+#     ca-certificates \
+#     tar \
+#     git
+
+# ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
+# RUN git clone https://github.com/onomyprotocol/cosmos-gravity-bridge.git $GRAVITY_DIR
+
+
+# # ------------------ gravity module ------------------
+# # install golang
+# RUN curl https://dl.google.com/go/go1.16.4.linux-amd64.tar.gz --output go.tar.gz
+# RUN tar -C /usr/local -xzf go.tar.gz
+# ENV PATH="/usr/local/go/bin:$PATH"
+# ENV GOPATH=/go
+# ENV PATH=$PATH:$GOPATH/bin
+# # build gravity artifact
+# WORKDIR $GRAVITY_DIR/module
+# # Build gravity artifact
+# RUN make install
+# # copy binary to bin
+# RUN cp /go/bin/gravity /usr/bin/gravity
 
 # ------------------ orchestrator ------------------
 # install rust
