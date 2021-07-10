@@ -26,4 +26,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push blockchain
-        run: docker buildx build --tag leeway321/gravity-bridge-binary:1.0 --file deploy/gravity-bridge-binary/Dockerfile --platform linux/amd64 --cache-from leeway321/gravity-bridge-binary:cache --cache-to leeway321/gravity-bridge-binary:cache --push --progress tty .
+        run: docker buildx build --tag leeway321/gravity-bridge-binary:0.0.1 --file deploy/gravity-bridge-binary/Dockerfile --platform linux/amd64 --cache-from leeway321/gravity-bridge-binary:cache --cache-to leeway321/gravity-bridge-binary:cache --push --progress tty .
