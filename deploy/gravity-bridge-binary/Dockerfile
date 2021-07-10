@@ -20,7 +20,11 @@ RUN make install
 FROM alpine:edge
 
 # Install ca-certificates
-RUN apk add --update ca-certificates curl build-essential tar git jq bash
+RUN apk add --update ca-certificates -yq software-properties-common \
+    curl \
+    build-essential \
+    tar \
+    git
 WORKDIR /root
 
 # Copy over binaries from the build-env
