@@ -65,6 +65,8 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # check cargo works
 RUN cargo version
 # build orchestrator artifact
+ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
+RUN git clone https://github.com/onomyprotocol/cosmos-gravity-bridge.git $GRAVITY_DIR
 WORKDIR $GRAVITY_DIR/orchestrator
 RUN rustup target add x86_64-unknown-linux-musl
 RUN apk add --no-cache yq musl
