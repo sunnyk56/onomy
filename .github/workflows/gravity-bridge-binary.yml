@@ -5,7 +5,7 @@ jobs:
   amd64:
     name: Gravity Bridge Binary
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/ONET-42'
+    if: github.ref == 'refs/heads/ONET-52'
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -26,4 +26,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push blockchain
-        run: docker buildx build --tag leeway321/gravity-bridge-binary --file deploy/gravity-bridge-binary/Dockerfile --platform linux/amd64 --cache-from leeway321/gravity-bridge-binary:cache --cache-to leeway321/gravity-bridge-binary:cache --push --progress tty .
+        run: docker buildx build --tag leeway321/gravity-bridge-binary:1.0 --file deploy/gravity-bridge-binary/Dockerfile --platform linux/amd64 --cache-from leeway321/gravity-bridge-binary:cache --cache-to leeway321/gravity-bridge-binary:cache --push --progress tty .
