@@ -36,53 +36,53 @@ RUN make build-linux
 # copy binary to bin
 RUN cp $GRAVITY_DIR/module/build/gravity /usr/bin/gravity
 
-# ------------------ orchestrator ------------------
-# install rust
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
-# check cargo works
-RUN cargo version
+# # ------------------ orchestrator ------------------
+# # install rust
+# RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+# ENV PATH="/root/.cargo/bin:${PATH}"
+# # check cargo works
+# RUN cargo version
 
-# build orchestrator artifact
-RUN pwd
-RUN ls
-WORKDIR $GRAVITY_DIR/orchestrator
-RUN pwd
-RUN ls
-RUN rustup target add x86_64-unknown-linux-musl
-RUN apt-get install --no-install-recommends -yq musl-tools
-RUN cargo build --target=x86_64-unknown-linux-musl --release  --all
-RUN cp $GRAVITY_DIR/orchestrator/target/x86_64-unknown-linux-musl/release/orchestrator /usr/bin/orchestrator
+# # build orchestrator artifact
+# RUN pwd
+# RUN ls
+# WORKDIR $GRAVITY_DIR/orchestrator
+# RUN pwd
+# RUN ls
+# RUN rustup target add x86_64-unknown-linux-musl
+# RUN apt-get install --no-install-recommends -yq musl-tools
+# RUN cargo build --target=x86_64-unknown-linux-musl --release  --all
+# RUN cp $GRAVITY_DIR/orchestrator/target/x86_64-unknown-linux-musl/release/orchestrator /usr/bin/orchestrator
 
-# ------------------ Solidity ------------------
-RUN apt-get install --no-install-recommends -yq python3 \
-    make \
-    g++
+# # ------------------ Solidity ------------------
+# RUN apt-get install --no-install-recommends -yq python3 \
+#     make \
+#     g++
 
-RUN curl -sL https://deb.nodesource.com/setup_15.x  | bash -
-RUN apt-get -y install nodejs
-# compile contract
-RUN pwd
-RUN ls
-WORKDIR $GRAVITY_DIR/solidity
-RUN pwd
-RUN ls
-RUN npm ci
-RUN chmod -R +x scripts
-RUN npm run typechain
+# RUN curl -sL https://deb.nodesource.com/setup_15.x  | bash -
+# RUN apt-get -y install nodejs
+# # compile contract
+# RUN pwd
+# RUN ls
+# WORKDIR $GRAVITY_DIR/solidity
+# RUN pwd
+# RUN ls
+# RUN npm ci
+# RUN chmod -R +x scripts
+# RUN npm run typechain
 
-# ------------------ ethereum go (geth) ------------------
-RUN add-apt-repository -y ppa:ethereum/ethereum
-RUN apt-get install --no-install-recommends -yq ethereum
-# ------------------ soft to run the scripts ------------------
-RUN apt-get install --no-install-recommends -yq jq \
-    moreutils
+# # ------------------ ethereum go (geth) ------------------
+# RUN add-apt-repository -y ppa:ethereum/ethereum
+# RUN apt-get install --no-install-recommends -yq ethereum
+# # ------------------ soft to run the scripts ------------------
+# RUN apt-get install --no-install-recommends -yq jq \
+#     moreutils
 
-# go to root home
-RUN pwd
-RUN ls
-#WORKDIR /root/home
-WORKDIR /root
-RUN pwd
-RUN ls
-CMD ["bash"]
+# # go to root home
+# RUN pwd
+# RUN ls
+# #WORKDIR /root/home
+# WORKDIR /root
+# RUN pwd
+# RUN ls
+# CMD ["bash"]
