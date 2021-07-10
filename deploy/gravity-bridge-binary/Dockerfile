@@ -3,18 +3,18 @@ FROM ubuntu:latest
 RUN apt-get update -y -q && apt-get upgrade -yq
 # common (DEBIAN_FRONTEND is a fix for tzdata)
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -yq software-properties-common \
-                                                curl \
-                                                build-essential \
-                                                ca-certificates \
-                                                tar \
-                                                git
+    curl \
+    build-essential \
+    ca-certificates \
+    tar \
+    git
 
-ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/gravity-bridge
+ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
 # clone the repo //TODO this clone may be change in future
 # I have tried using repo https://github.com/althea-net/cosmos-gravity-bridge.git but there is no
 # command make build-linux found in makesfiles, so we forked anddd thhis command
 #RUN git clone https://github.com/althea-net/cosmos-gravity-bridge.git $GRAVITY_DIR
-RUN git clone https://github.com/ChaudharyShiva18/cosmos-gravity-bridge.git $GRAVITY_DIR
+RUN git clone https://github.com/onomyprotocol/cosmos-gravity-bridge.git $GRAVITY_DIR
 
 
 # ------------------ gravity module ------------------
@@ -56,8 +56,8 @@ RUN cp $GRAVITY_DIR/orchestrator/target/x86_64-unknown-linux-musl/release/orches
 
 # ------------------ Solidity ------------------
 RUN apt-get install --no-install-recommends -yq python3 \
-                                                make \
-                                                g++
+    make \
+    g++
 
 RUN curl -sL https://deb.nodesource.com/setup_15.x  | bash -
 RUN apt-get -y install nodejs
@@ -76,7 +76,7 @@ RUN add-apt-repository -y ppa:ethereum/ethereum
 RUN apt-get install --no-install-recommends -yq ethereum
 # ------------------ soft to run the scripts ------------------
 RUN apt-get install --no-install-recommends -yq jq \
-                                                moreutils
+    moreutils
 
 # go to root home
 RUN pwd

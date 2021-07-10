@@ -1,10 +1,11 @@
 name: Master-Node
-on: [ push ]
+on: [push]
 
 jobs:
   amd64:
     name: Master-Node
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/ONET-42'
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -50,7 +51,6 @@ jobs:
 
       - name: deploy smart contract and save on GitGub
         run: docker buildx build --tag leeway321/deploy-gravity-contract-1 --file deploy/master-cosmos-orchestrator-node/deployContract/Dockerfile --platform linux/amd64 --push --progress tty --build-arg GRAVITY_HOST=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg ETH_HOST=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config .
-
 
       - name: Build and push master-cosmos-orch-node
         run: docker buildx build --tag leeway321/master-cosmos-orch-node --file deploy/master-cosmos-orchestrator-node/orchestrator/Dockerfile --platform linux/amd64 --push --progress tty --build-arg PUBLIC_IP=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config .

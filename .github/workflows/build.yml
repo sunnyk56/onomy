@@ -11,6 +11,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/ONET-42'
     strategy:
       matrix:
         arch: [amd64, arm64]
@@ -36,4 +37,3 @@ jobs:
         with:
           name: onomyd ${{ matrix.targetos }} ${{ matrix.arch }}
           path: cmd/onomyd/onomyd
-

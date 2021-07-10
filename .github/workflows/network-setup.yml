@@ -1,10 +1,11 @@
 name: Network-Setup
-on: [ push ]
+on: [push]
 
 jobs:
   amd64:
     name: Network-Setup
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/ONET-42'
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -86,4 +87,3 @@ jobs:
           username: root
           password: ""
           privateKey: ${{ secrets.PRIVATE_KEY}}
-

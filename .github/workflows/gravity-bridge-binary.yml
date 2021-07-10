@@ -1,10 +1,11 @@
 name: Gravity Bridge Binary
-on: [ push, pull_request ]
+on: [push, pull_request]
 
 jobs:
   amd64:
     name: Gravity Bridge Binary
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/ONET-42'
     steps:
       - name: checkout
         uses: actions/checkout@v2

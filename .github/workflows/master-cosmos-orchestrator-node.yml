@@ -1,10 +1,11 @@
 name: Master-cosmos-orchestrator-node
-on: [ push ]
+on: [push]
 
 jobs:
   amd64:
     name: Master-cosmos-orchestrator-node
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/ONET-42'
     steps:
       - name: checkout
         uses: actions/checkout@v2
