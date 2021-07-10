@@ -70,6 +70,7 @@ RUN rustup target add x86_64-unknown-linux-musl
 RUN apk add --no-cache yq musl
 RUN ls
 # RUN apt-get install --no-install-recommends -yq musl-tools
+WORKDIR $GRAVITY_DIR/orchestrator
 RUN cargo build --target=x86_64-unknown-linux-musl --release  --all
 RUN cp $GRAVITY_DIR/orchestrator/target/x86_64-unknown-linux-musl/release/gbt /usr/bin/gbt
 
