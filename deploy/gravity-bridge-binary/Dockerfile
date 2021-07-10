@@ -20,7 +20,7 @@ RUN make install
 FROM alpine:edge
 
 # Install ca-certificates
-RUN apk add --update ca-certificates -yq software-properties-common \
+RUN apk add --no-cache ca-certificates yq \
     curl \
     build-essential \
     tar \
@@ -67,17 +67,19 @@ RUN cargo version
 # build orchestrator artifact
 WORKDIR $GRAVITY_DIR/orchestrator
 RUN rustup target add x86_64-unknown-linux-musl
-RUN apt-get install --no-install-recommends -yq musl-tools
+RUN apk add --no-cache yq musl-tools
+# RUN apt-get install --no-install-recommends -yq musl-tools
 RUN cargo build --target=x86_64-unknown-linux-musl --release  --all
 RUN cp $GRAVITY_DIR/orchestrator/target/x86_64-unknown-linux-musl/release/gbt /usr/bin/gbt
 
 # ------------------ Solidity ------------------
-RUN apt-get install --no-install-recommends -yq python3 \
+RUN apk add --no-cache yq python3 \
     make \
     g++
 
 RUN curl -sL https://deb.nodesource.com/setup_15.x  | bash -
-RUN apt-get -y install nodejs
+RUN apk add --update nodejs nodejs-npm
+# RUN apt-get -y install nodejs
 # compile contract
 WORKDIR $GRAVITY_DIR/solidity
 RUN npm ci
@@ -85,10 +87,10 @@ RUN chmod -R +x scripts
 RUN npm run typechain
 
 # ------------------ ethereum go (geth) ------------------
-RUN add-apt-repository -y ppa:ethereum/ethereum
-RUN apt-get install --no-install-recommends -yq ethereum
+# RUN add-apt-repository -y ppa:ethereum/ethereum
+RUN apk add --no-cache yq geth
 # ------------------ soft to run the scripts ------------------
-RUN apt-get install --no-install-recommends -yq jq \
+RUN apk add --no-cache yq jq \
     moreutils
 
 # go to root
