@@ -41,32 +41,30 @@ RUN git clone https://github.com/onomyprotocol/cosmos-gravity-bridge.git $GRAVIT
 # RUN cp $GRAVITY_DIR/orchestrator/target/x86_64-unknown-linux-musl/release/gbt /usr/bin/orchestrator
 
 # ------------------ Solidity ------------------
-RUN apt-get install --no-install-recommends -yq python3 \
-    make \
-    g++
+# RUN apt-get install --no-install-recommends -yq python3 \
+#     make \
+#     g++
 
-RUN curl -sL https://deb.nodesource.com/setup_15.x  | bash -
-RUN apt-get -y install nodejs
-# compile contract
-WORKDIR $GRAVITY_DIR/solidity
+# RUN curl -sL https://deb.nodesource.com/setup_15.x  | bash -
+# RUN apt-get -y install nodejs
+# # compile contract
+# WORKDIR $GRAVITY_DIR/solidity
+# RUN npm ci
+# RUN chmod -R +x scripts
+# RUN npm run typechain
+
+# ------------------ ethereum go (geth) ------------------
+RUN add-apt-repository -y ppa:ethereum/ethereum
+RUN apt-get install --no-install-recommends -yq ethereum
+# ------------------ soft to run the scripts ------------------
+RUN apt-get install --no-install-recommends -yq jq \
+    moreutils
+
+# go to root home
 RUN pwd
 RUN ls
-RUN npm ci
-RUN chmod -R +x scripts
-RUN npm run typechain
-
-# # ------------------ ethereum go (geth) ------------------
-# RUN add-apt-repository -y ppa:ethereum/ethereum
-# RUN apt-get install --no-install-recommends -yq ethereum
-# # ------------------ soft to run the scripts ------------------
-# RUN apt-get install --no-install-recommends -yq jq \
-#     moreutils
-
-# # go to root home
-# RUN pwd
-# RUN ls
-# #WORKDIR /root/home
-# WORKDIR /root
-# RUN pwd
-# RUN ls
-# CMD ["bash"]
+#WORKDIR /root/home
+WORKDIR /root
+RUN pwd
+RUN ls
+CMD ["bash"]
