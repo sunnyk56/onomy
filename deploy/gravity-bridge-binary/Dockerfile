@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt-get update -y -q && apt-get upgrade -yq
+RUN apt-get update -y -q && apt-get upgrade -yq && apt-get install --fix-missing -yq
 # common (DEBIAN_FRONTEND is a fix for tzdata)
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -yq software-properties-common \
     curl \
