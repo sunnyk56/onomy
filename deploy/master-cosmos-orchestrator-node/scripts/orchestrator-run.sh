@@ -38,7 +38,7 @@ ETH_RPC=http://$ETH_HOST:8545
 ETH_PRIVATE_KEY=$(jq -r .private_key $GRAVITY_HOME/eth_key.json)
 echo "Run orchestrator"
 
-orchestrator --cosmos-phrase="$COSMOS_PHRASE" \
+gbt orchestrator --cosmos-phrase="$COSMOS_PHRASE" \
              --ethereum-key="$ETH_PRIVATE_KEY" \
              --cosmos-grpc="$COSMOS_GRPC" \
              --ethereum-rpc="$ETH_RPC" \
