@@ -22,5 +22,6 @@ RUN chmod -R +x /root/testchain
 WORKDIR /root/onomy
 RUN sh /root/onomy/deploy/master-cosmos-orchestrator-node/scripts/deploy-contract.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH $GRAVITY_HOST $ETH_HOST
 
+
 ##----------------------------- commit save Contract address-----
 #RUN sh deploy/master-cosmos-orchestrator-node/scripts/store-ethereum-contract-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
