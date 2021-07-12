@@ -1,4 +1,4 @@
-FROM leeway321/gravity-bridge-binary:latest as builder
+FROM leeway321/gravity-bridge-binary:0.0.1 as builder
 
 ARG GRAVITY_HOST=${GRAVITY_HOST}
 ARG ETH_HOST=${ETH_HOST}

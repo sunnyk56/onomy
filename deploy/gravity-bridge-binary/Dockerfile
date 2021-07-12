@@ -9,7 +9,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -yq
     tar \
     git
 
-ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/cosmos-gravity-bridge
+ARG GRAVITY_DIR=/go/src/github.com/onomyprotocol/gravity-bridge
 RUN git clone https://github.com/onomyprotocol/cosmos-gravity-bridge.git $GRAVITY_DIR
 
 

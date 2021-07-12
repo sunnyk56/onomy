@@ -1,4 +1,4 @@
-FROM leeway321/gravity-bridge-binary:latest as builder
+FROM leeway321/gravity-bridge-binary:0.0.1:latest as builder
 
 EXPOSE 8545 30303
 ARG PUBLIC_IP=${PUBLIC_IP}
