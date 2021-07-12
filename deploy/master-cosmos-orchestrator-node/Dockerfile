@@ -1,4 +1,4 @@
-FROM leeway321/gravity-bridge-binary:latest as builder
+FROM leeway321/gravity-bridge-binary:0.0.1 as builder
 
 EXPOSE 26656 26657 61278 1317 9090 8545
 ARG CHAIN_ID="gravity-testnet"
