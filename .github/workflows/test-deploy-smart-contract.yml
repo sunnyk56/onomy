@@ -5,7 +5,7 @@ jobs:
   amd64:
     name: Test-Deploy-Smart-Contract
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/ONET-42'
+#    if: github.ref == 'refs/heads/ONET-42'
     steps:
       - name: checkout
         uses: actions/checkout@v2
