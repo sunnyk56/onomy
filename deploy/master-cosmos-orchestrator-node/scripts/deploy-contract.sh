@@ -12,7 +12,7 @@ GRAVITY=gravity
 # The name of the gravity node
 GRAVITY_NODE_NAME="gravity"
 # The address to run gravity node
-GRAVITY_HOST="143.244.147.226"
+# GRAVITY_HOST="143.244.147.226"
 GIT_HUB_USER=$1
 GIT_HUB_PASS=$2
 GIT_HUB_EMAIL=$3
