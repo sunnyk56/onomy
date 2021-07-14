@@ -30,8 +30,8 @@ STAKE_DENOM="stake"
 
 #ETH_MINER_PRIVATE_KEY="0xb1bab011e03a9862664706fc3bbaa1b16651528e5f0e7fbfcbfdd8be302a13e7"
 #ETH_MINER_PUBLIC_KEY="0xBf660843528035a5A4921534E156a27e64B231fE"
-ETH_MINER_PRIVATE_KEY="0x61e74158bf00db416a6531111f023e19aabaaeb590ec2fa06dbe405539b55cf1"
-ETH_MINER_PUBLIC_KEY="0x04429d18792ad19e5fa60f38923e6281e824657f5fdc08f214cee36a85b62741e0a44e016fd3ecf638125e720934f6a1d8e09de8425bad56ddb147e8b58626b383"
+ETH_MINER_PRIVATE_KEY="0x5547456ffcc07db7e10c44ba722ec649bd10fead08e7a9734f1c32174f310a40"
+ETH_MINER_PUBLIC_KEY="0x04f691f84de3ff786a772c9765e91837f79bf28e8607d8731e092f7463502e8eca7c96323a3421a56bd4a37bb216ccd6ae1c3e6e032ae460143076b524bd4ac5b2"
 # The host of ethereum node
 # ETH_HOST="143.244.147.226"
 
@@ -47,7 +47,7 @@ echo ts-node \
     --eth-node="http://$ETH_HOST:8545" \
     --eth-privkey="$ETH_MINER_PRIVATE_KEY" \
     --contract=artifacts/contracts/Gravity.sol/Gravity.json \
-    --test-mode=true
+    --test-mode=false
 
 npx ts-node \
     contract-deployer.ts \
@@ -55,18 +55,42 @@ npx ts-node \
     --eth-node="http://$ETH_HOST:8545" \
     --eth-privkey="$ETH_MINER_PRIVATE_KEY" \
     --contract=artifacts/contracts/Gravity.sol/Gravity.json \
-    --test-mode=true | grep "Gravity deployed at Address" | grep -Eow '0x[0-9a-fA-F]{40}' >> /root/eth_contract_address
+    --test-mode=false | grep "Gravity deployed at Address" | grep -Eow '0x[0-9a-fA-F]{40}' >> /root/eth_contract_address
 
 CONTRACT_ADDRESS=$(cat /root/eth_contract_address)
 echo "Contract address: $CONTRACT_ADDRESS"
 
 ###----------------------------- commit save Contract address-----
-#cd /root/onomy/
+cd /root/onomy/
 #sh deploy/master-cosmos-orchestrator-node/scripts/store-ethereum-contract-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
+# # return back to home
+# cd $CURRENT_WORKING_DIR
+# echo "going to store contract address on github"
+# sh deploy/master-cosmos-orchestrator-node/scripts/store-ethereum-contract-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
+# #sleep 10
+GRAVITY_CHAIN_DATA="/root/eth_contract_address"
+BUCKET_MASTER_CHAIN_DATA="/root/onomy/master/eth_contract_address"
 
-# return back to home
-cd $CURRENT_WORKING_DIR
-echo "going to store contract address on github"
-sh deploy/master-cosmos-orchestrator-node/scripts/store-ethereum-contract-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
+echo "Get pull updates"
+git pull origin $GIT_HUB_BRANCH
 
-#sleep 10
+echo "add master contract information file"
+rm -rf $BUCKET_MASTER_CHAIN_DATA
+touch $BUCKET_MASTER_CHAIN_DATA
+echo "Copying contract file"
+cp $GRAVITY_CHAIN_DATA $BUCKET_MASTER_CHAIN_DATA
+echo "git add command"
+git add master
+echo "git add git config command"
+git config --global user.email $GIT_HUB_EMAIL
+git config --global user.name $GIT_HUB_USER
+# //TODO this repo name should be pass as parameter
+git remote set-url origin https://$GIT_HUB_USER:$GIT_HUB_PASS@github.com/sunnyk56/onomy.git
+
+echo "git commit command"
+git commit -m "add smart contract address in master directory file"
+
+echo "git fetch command"
+git fetch
+echo "git push command"
+git push origin $GIT_HUB_BRANCH
