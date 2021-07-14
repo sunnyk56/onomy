@@ -1,4 +1,4 @@
-GRAVITY_CHAIN_DATA="/root/testchain/gravity/eth_contract_address"
+GRAVITY_CHAIN_DATA="/root/eth_contract_address"
 BUCKET_MASTER_CHAIN_DATA="master/eth_contract_address"
 
 GIT_HUB_USER=$1

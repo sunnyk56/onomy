@@ -40,8 +40,7 @@ ETH_MINER_PUBLIC_KEY="0x04429d18792ad19e5fa60f38923e6281e824657f5fdc08f214cee36a
 echo "Applying contracts"
 GRAVITY_DIR=/go/src/github.com/onomyprotocol/gravity-bridge/
 cd $GRAVITY_DIR/solidity
-ls
-echo "running contract-deployer.ts: GRAVITY_HOST: $GRAVITY_HOST ETH_HOST: $ETH_HOST  6 : '$6'"
+# echo "running contract-deployer.ts: GRAVITY_HOST: $GRAVITY_HOST ETH_HOST: $ETH_HOST  6 : '$6'"
 echo ts-node \
     contract-deployer.ts \
     --cosmos-node="http://$GRAVITY_HOST:26657" \
@@ -56,9 +55,9 @@ npx ts-node \
     --eth-node="http://$ETH_HOST:8545" \
     --eth-privkey="$ETH_MINER_PRIVATE_KEY" \
     --contract=artifacts/contracts/Gravity.sol/Gravity.json \
-    --test-mode=true | grep "Gravity deployed at Address" | grep -Eow '0x[0-9a-fA-F]{40}' >> /root/testchain/gravity/eth_contract_address
+    --test-mode=true | grep "Gravity deployed at Address" | grep -Eow '0x[0-9a-fA-F]{40}' >> /root/eth_contract_address
 
-CONTRACT_ADDRESS=$(cat $GRAVITY_HOME/eth_contract_address)
+CONTRACT_ADDRESS=$(cat /root/eth_contract_address)
 echo "Contract address: $CONTRACT_ADDRESS"
 
 ###----------------------------- commit save Contract address-----
