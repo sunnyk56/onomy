@@ -23,15 +23,15 @@ GRAVITY_ADDRESS_PREFIX=cosmos
 # Gravity chain demons
 STAKE_DENOM="stake"
 
-#ETH_MINER_PRIVATE_KEY="0xb1bab011e03a9862664706fc3bbaa1b16651528e5f0e7fbfcbfdd8be302a13e7"
-#ETH_MINER_PUBLIC_KEY="0xBf660843528035a5A4921534E156a27e64B231fE"
-ETH_MINER_PRIVATE_KEY="c80c8a1a8da0bb6cf08dc95dd9e70682bac967ec341557e2b946b0a670c291dd"
-ETH_MINER_PUBLIC_KEY="0x90Dba8eD66c33508285Bc5ADB411356b577079A2"
+ETH_MINER_PRIVATE_KEY="0xb1bab011e03a9862664706fc3bbaa1b16651528e5f0e7fbfcbfdd8be302a13e7"
+ETH_MINER_PUBLIC_KEY="0xBf660843528035a5A4921534E156a27e64B231fE"
+# ETH_MINER_PRIVATE_KEY="c80c8a1a8da0bb6cf08dc95dd9e70682bac967ec341557e2b946b0a670c291dd"
+# ETH_MINER_PUBLIC_KEY="0x90Dba8eD66c33508285Bc5ADB411356b577079A2"
 # The host of ethereum node
 #ETH_HOST="0.0.0.0"
 ETH_HOST=$2
 
-CONTRACT_ADDRESS=$(cat $GRAVITY_HOME/eth_contract_address)
+CONTRACT_ADDRESS=$(cat /root/onomy/master/eth_contract_address)
 echo "Contract address: $CONTRACT_ADDRESS"
 
 echo "Gathering keys for orchestrator"
@@ -41,10 +41,16 @@ ETH_RPC=http://$ETH_HOST:8545
 ETH_PRIVATE_KEY=$(jq -r .private_key $GRAVITY_HOME/eth_key.json)
 echo "Run orchestrator"
 
+# orchestrator --cosmos-phrase="$COSMOS_PHRASE" \
+#              --ethereum-key="$ETH_PRIVATE_KEY" \
+#              --cosmos-grpc="$COSMOS_GRPC" \
+#              --ethereum-rpc="$ETH_RPC" \
+#              --fees="$STAKE_DENOM" \
+#              --gravity-contract-address="$CONTRACT_ADDRESS"\
+#              --address-prefix="$GRAVITY_ADDRESS_PREFIX"
 gbt orchestrator --cosmos-phrase="$COSMOS_PHRASE" \
              --ethereum-key="$ETH_PRIVATE_KEY" \
              --cosmos-grpc="$COSMOS_GRPC" \
              --ethereum-rpc="$ETH_RPC" \
              --fees="1$STAKE_DENOM" \
-             --gravity-contract-address="$CONTRACT_ADDRESS"\
-            #  --address-prefix="$GRAVITY_ADDRESS_PREFIX"
+             --gravity-contract-address="$CONTRACT_ADDRESS"
