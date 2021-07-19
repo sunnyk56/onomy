@@ -70,6 +70,6 @@ echo "Run the gravity start scripts"
 gravity $GRAVITY_HOME_FLAG start --pruning=nothing &>/dev/null
 
 # Resets the blockchain database, removes address book files and start the node
-#gravity $GRAVITY_HOME_FLAG unsafe-reset-all
-#gravity $GRAVITY_HOME_FLAG --address tcp://0.0.0.0:26655 --rpc.laddr tcp://0.0.0.0:26657 --grpc.address 0.0.0.0:9090 --log_level error --p2p.laddr tcp://0.0.0.0:26656 --rpc.pprof_laddr 0.0.0.0:6060 start
-#sh /root/scripts/cosmos-run.sh
+gravity $GRAVITY_HOME_FLAG unsafe-reset-all
+gravity $GRAVITY_HOME_FLAG --address tcp://0.0.0.0:26655 --rpc.laddr tcp://0.0.0.0:26657 --grpc.address 0.0.0.0:9090 --log_level error --p2p.laddr tcp://0.0.0.0:26656 --rpc.pprof_laddr 0.0.0.0:6060 start
+sh /root/scripts/cosmos-run.sh
