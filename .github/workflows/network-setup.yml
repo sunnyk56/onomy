@@ -68,7 +68,7 @@ jobs:
           privateKey: ${{ secrets.PRIVATE_KEY}}
 
       - name: deploy smart contract and save on GitGub
-        run: docker buildx build --tag leeway321/deploy-gravity-contract-1 --file deploy/master-cosmos-orchestrator-node/deployContract/Dockerfile --platform linux/amd64 --push --progress tty --build-arg GRAVITY_HOST=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg ETH_HOST=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config .
+        run: docker buildx build --tag leeway321/deploy-gravity-contract-1 --file deploy/master-cosmos-orchestrator-node/deployContract/Dockerfile --platform linux/amd64 --push --progress tty --build-arg GRAVITY_HOST=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg ETH_HOST=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config --build-arg GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
 
       - name: start master-cosmos-orch-node
         uses: garygrossgarten/github-action-ssh@release
