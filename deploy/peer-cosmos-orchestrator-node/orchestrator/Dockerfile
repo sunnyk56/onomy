@@ -4,9 +4,10 @@ EXPOSE 61278
 ARG GRAVITY_HOST=${GRAVITY_HOST}
 ARG ETH_HOST=${ETH_HOST}
 ARG GIT_HUB_BRANCH=${GIT_HUB_BRANCH}
+ARG GIT_HUB_REPO=${GIT_HUB_REPO}
 
 # //TODO this clone may be change in future
-RUN git clone -b $GIT_HUB_BRANCH https://github.com/sunnyk56/onomy.git
+RUN git clone -b $GIT_HUB_BRANCH $GIT_HUB_REPO
 RUN cp -r /root/onomy/deploy/peer-cosmos-orchestrator-node/scripts scripts
 RUN cp -r /root/onomy/master/assets assets
 RUN cp -r /root/onomy/peerInfo/testchain testchain
