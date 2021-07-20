@@ -26,16 +26,16 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push master-cosmos-validator-node
-        run: docker buildx build --tag leeway321/master-cosmos-validator-node --file deploy/master-cosmos-orchestrator-node/cosmos/Dockerfile --platform linux/amd64 --push --progress tty --build-arg PUBLIC_IP=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
+        run: docker buildx build --tag leeway321/master-cosmos-validator-node --file deploy/master-cosmos-orchestrator-node/cosmos/Dockerfile --platform linux/amd64 --push --progress tty --build-arg PUBLIC_IP=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config --build-arg GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
 
       - name: Build and push master-cosmos-orch-node
-        run: docker buildx build --tag leeway321/master-cosmos-orch-node --file deploy/master-cosmos-orchestrator-node/orchestrator/Dockerfile --platform linux/amd64 --push --progress tty --build-arg PUBLIC_IP=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
+        run: docker buildx build --tag leeway321/master-cosmos-orch-node --file deploy/master-cosmos-orchestrator-node/orchestrator/Dockerfile --platform linux/amd64 --push --progress tty --build-arg PUBLIC_IP=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config --build-arg GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
 
       - name: Build and push peer-cosmos-validator-node
-        run: docker buildx build --tag leeway321/peer-cosmos-validator-node --file deploy/peer-cosmos-orchestrator-node/cosmos/Dockerfile --platform linux/amd64 --push --progress tty --build-arg PUBLIC_IP=${{ secrets.FULL_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
+        run: docker buildx build --tag leeway321/peer-cosmos-validator-node --file deploy/peer-cosmos-orchestrator-node/cosmos/Dockerfile --platform linux/amd64 --push --progress tty --build-arg PUBLIC_IP=${{ secrets.FULL_NODE_HOST }} --build-arg GIT_HUB_USER=sunnyk56 --build-arg GIT_HUB_PASS=Leeway321 --build-arg GIT_HUB_EMAIL=sunnyk@leewayhertz.com --build-arg GIT_HUB_BRANCH=config --build-arg GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
 
       - name: Build and push peer-cosmos-orch-node
-        run: docker buildx build --tag leeway321/peer-cosmos-orch-node --file deploy/peer-cosmos-orchestrator-node/orchestrator/Dockerfile --platform linux/amd64 --push --progress tty --build-arg GRAVITY_HOST=${{ secrets.FULL_NODE_HOST }} --build-arg ETH_HOST=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_BRANCH=config GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
+        run: docker buildx build --tag leeway321/peer-cosmos-orch-node --file deploy/peer-cosmos-orchestrator-node/orchestrator/Dockerfile --platform linux/amd64 --push --progress tty --build-arg GRAVITY_HOST=${{ secrets.FULL_NODE_HOST }} --build-arg ETH_HOST=${{ secrets.MASTER_COSMOS_NODE_HOST }} --build-arg GIT_HUB_BRANCH=config --build-arg GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
 
       - name: start master-cosmos-validator-node
         uses: garygrossgarten/github-action-ssh@release
@@ -56,7 +56,7 @@ jobs:
           privateKey: ${{ secrets.PRIVATE_KEY}}
 
       - name: Build and push master-cosmos-eth-node
-        run: docker buildx build --tag leeway321/master-cosmos-eth-node --file deploy/master-cosmos-orchestrator-node/ethereum/Dockerfile --platform linux/amd64 --push --progress tty --build-arg GIT_HUB_BRANCH=config GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
+        run: docker buildx build --tag leeway321/master-cosmos-eth-node --file deploy/master-cosmos-orchestrator-node/ethereum/Dockerfile --platform linux/amd64 --push --progress tty --build-arg GIT_HUB_BRANCH=config --build-arg  GIT_HUB_REPO=https://github.com/sunnyk56/onomy.git .
 
       - name: start master-cosmos-eth-node
         uses: garygrossgarten/github-action-ssh@release
