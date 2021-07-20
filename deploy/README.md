@@ -9,6 +9,8 @@ This holds the code to start a peer validator node that starts a gravity validat
 ---
 # Network-setup
 - ```network-setup.yml``` this git action starts a test network in which there are two validators, two orchestrators, and one ethereum node.
+- In this network the one validators and orchestrator containers set is running in one machine and another one in other machine.
+- Ethereum node container is running independently.
 - Steps which are taken into consideration to start the test net : 
 ### Start the validators
 - Build and push image for the ```master-cosmos-validator-node``` and ```peer-cosmos-validator-node``` to the dockerhub.
