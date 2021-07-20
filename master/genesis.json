@@ -44,6 +44,20 @@
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "cosmos1h7pvxv2hnmukkkjukjw2xg5eaug9ya3redygka",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "cosmos10h407wn3utcjd4udf2z7w7nhyt667hd2dwnj45",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
         }
       ]
     },
@@ -68,6 +82,32 @@
         },
         {
           "address": "cosmos14x2gh658qmssnxec2855z30mg8l5u6rdm98tqf",
+          "coins": [
+            {
+              "denom": "samoleans",
+              "amount": "100000000000"
+            },
+            {
+              "denom": "stake",
+              "amount": "100000000000"
+            }
+          ]
+        },
+        {
+          "address": "cosmos1h7pvxv2hnmukkkjukjw2xg5eaug9ya3redygka",
+          "coins": [
+            {
+              "denom": "samoleans",
+              "amount": "100000000000"
+            },
+            {
+              "denom": "stake",
+              "amount": "100000000000"
+            }
+          ]
+        },
+        {
+          "address": "cosmos10h407wn3utcjd4udf2z7w7nhyt667hd2dwnj45",
           "coins": [
             {
               "denom": "samoleans",
@@ -117,6 +157,73 @@
     },
     "genutil": {
       "gen_txs": [
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "gravity",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "cosmos1h7pvxv2hnmukkkjukjw2xg5eaug9ya3redygka",
+                "validator_address": "cosmosvaloper1h7pvxv2hnmukkkjukjw2xg5eaug9ya3ruesa6w",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "yPSKHE1G5FSeQr7aWcEHgpV6Q3VrzNC1jqEOK1F1mfg="
+                },
+                "value": {
+                  "denom": "stake",
+                  "amount": "100000000000"
+                }
+              },
+              {
+                "@type": "/gravity.v1.MsgSetOrchestratorAddress",
+                "validator": "cosmosvaloper1h7pvxv2hnmukkkjukjw2xg5eaug9ya3ruesa6w",
+                "orchestrator": "cosmos10h407wn3utcjd4udf2z7w7nhyt667hd2dwnj45",
+                "eth_address": "0xe1C0BCE15Eadd040799900599857A3a52d4513e5"
+              }
+            ],
+            "memo": "550144c8e015d99c2616addb8b3d380bcd05061b@0.0.0.0:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "AmpRhnWnikq1xitCpVer6lI6eDyBRaZl3SytwVl3UNwz"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "J2k9R+P2PIz465kSIIeG384ww5YrzK2jYOAtssfurz5aVjx8+tB0XN6X0GDnbDbKCrAQpKOPb4Y1l8nrpTdVDQ=="
+          ]
+        },
         {
           "body": {
             "messages": [
