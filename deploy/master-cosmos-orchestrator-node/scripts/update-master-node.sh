@@ -16,7 +16,8 @@ GRAVITY_HOME_FLAG="--home /root/testchain/gravity"
 
 
 STAKE_DENOM="stake"
-NORMAL_DENOM="samoleans"
+#NORMAL_DENOM="samoleans"
+NORMAL_DENOM="footoken"
 GRAVITY_GENESIS_COINS="100000000000$STAKE_DENOM,100000000000$NORMAL_DENOM"
 
 echo "Get pull updates"

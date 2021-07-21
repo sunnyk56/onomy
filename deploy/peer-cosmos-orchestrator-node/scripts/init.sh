@@ -33,7 +33,8 @@ GRAVITY_VALIDATOR_NAME=val
 GRAVITY_ORCHESTRATOR_NAME=orch
 # Gravity chain demons
 STAKE_DENOM="stake"
-NORMAL_DENOM="samoleans"
+#NORMAL_DENOM="samoleans"
+NORMAL_DENOM="footoken"
 
 # This key is the private key for the public key defined in ETHGenesis.json
 # where the full node / miner sends its rewards. Therefore it's always going
