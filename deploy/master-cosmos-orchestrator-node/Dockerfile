@@ -13,7 +13,8 @@ ARG GIT_HUB_EMAIL=${GIT_HUB_EMAIL}
 ARG GIT_HUB_BRANCH=${GIT_HUB_BRANCH}
 ARG GIT_HUB_REPO=${GIT_HUB_REPO}
 
-ARG GRAVITY_GENESIS_COINS="100000000000stake,100000000000samoleans"
+#ARG GRAVITY_GENESIS_COINS="100000000000stake,100000000000samoleans"
+ARG GRAVITY_GENESIS_COINS="100000000000stake,100000000000footoken"
 
 # purpose of clone the repo is to get updated Ethgenesis.json file
 # //TODO this clone may be change in future
