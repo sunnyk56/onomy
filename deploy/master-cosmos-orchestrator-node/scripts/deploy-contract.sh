@@ -55,8 +55,11 @@ npx ts-node \
     --eth-node="http://$ETH_HOST:8545" \
     --eth-privkey="$ETH_MINER_PRIVATE_KEY" \
     --contract=artifacts/contracts/Gravity.sol/Gravity.json \
-    --test-mode=false | grep "Gravity deployed at Address" | grep -Eow '0x[0-9a-fA-F]{40}' >> /root/eth_contract_address
+    --test-mode=true | jq . >> /root/contracts
+#    --test-mode=false | grep "Gravity deployed at Address" | grep -Eow '0x[0-9a-fA-F]{40}' >> /root/eth_contract_address
 
+echo "extract gravity contract address"
+grep "Gravity deployed at Address" /root/contracts | grep -Eow '0x[0-9a-fA-F]{40}' >> /root/eth_contract_address
 CONTRACT_ADDRESS=$(cat /root/eth_contract_address)
 echo "Contract address: $CONTRACT_ADDRESS"
 
@@ -69,16 +72,21 @@ cd /root/onomy/
 # sh deploy/master-cosmos-orchestrator-node/scripts/store-ethereum-contract-info.sh $GIT_HUB_USER $GIT_HUB_PASS $GIT_HUB_EMAIL $GIT_HUB_BRANCH
 # #sleep 10
 GRAVITY_CHAIN_DATA="/root/eth_contract_address"
+GRAVITY_CHAIN_CONTRACT="/root/contracts"
 BUCKET_MASTER_CHAIN_DATA="/root/onomy/master/eth_contract_address"
+BUCKET_MASTER_CHAIN_CONTRACT="/root/onomy/master/contracts"
 
 echo "Get pull updates"
 git pull origin $GIT_HUB_BRANCH
 
 echo "add master contract information file"
 rm -rf $BUCKET_MASTER_CHAIN_DATA
+rm -rf $BUCKET_MASTER_CHAIN_CONTRACT
 touch $BUCKET_MASTER_CHAIN_DATA
+touch $BUCKET_MASTER_CHAIN_CONTRACT
 echo "Copying contract file"
 cp $GRAVITY_CHAIN_DATA $BUCKET_MASTER_CHAIN_DATA
+cp $GRAVITY_CHAIN_CONTRACT $BUCKET_MASTER_CHAIN_CONTRACT
 echo "git add command"
 git add master
 echo "git add git config command"
