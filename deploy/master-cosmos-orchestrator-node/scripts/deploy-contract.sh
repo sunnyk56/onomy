@@ -37,6 +37,9 @@ ETH_MINER_PUBLIC_KEY="0xBf660843528035a5A4921534E156a27e64B231fE"
 
 
 
+echo "copy the all test mode contract"
+cp -r /go/src/github.com/onomyprotocol/gravity-bridge/. /gravity
+
 echo "Applying contracts"
 GRAVITY_DIR=/go/src/github.com/onomyprotocol/gravity-bridge/
 cd $GRAVITY_DIR/solidity
