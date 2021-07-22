@@ -47,7 +47,7 @@ echo ts-node \
     --eth-node="http://$ETH_HOST:8545" \
     --eth-privkey="$ETH_MINER_PRIVATE_KEY" \
     --contract=artifacts/contracts/Gravity.sol/Gravity.json \
-    --test-mode=false
+    --test-mode=true
 
 npx ts-node \
     contract-deployer.ts \
@@ -55,7 +55,7 @@ npx ts-node \
     --eth-node="http://$ETH_HOST:8545" \
     --eth-privkey="$ETH_MINER_PRIVATE_KEY" \
     --contract=artifacts/contracts/Gravity.sol/Gravity.json \
-    --test-mode=true | jq . >> /root/contracts
+    --test-mode=true >> /root/contracts
 #    --test-mode=false | grep "Gravity deployed at Address" | grep -Eow '0x[0-9a-fA-F]{40}' >> /root/eth_contract_address
 
 echo "extract gravity contract address"
